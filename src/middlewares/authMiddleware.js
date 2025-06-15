@@ -14,7 +14,7 @@ export const auth = async (req, res, next) => {
       token = req.headers.authorization.split(" ")[1];
       const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY);
 
-      req.user = await UserModel.findById(decoded.user.id).select("-password"); // Exclude Password
+      req.user = await UserModel.findById(decoded.user.id).select("-password");
       next();
     } catch (error) {
       console.log("Token verification failed:", error);
